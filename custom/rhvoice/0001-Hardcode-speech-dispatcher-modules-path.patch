@@ -1,0 +1,25 @@
+From 803356a58bf81141067642eb5bbc4b461a5d068d Mon Sep 17 00:00:00 2001
+From: Nikita Travkin <nikita@trvn.ru>
+Date: Thu, 5 Aug 2021 11:36:50 +0500
+Subject: [PATCH] Hardcode speech-dispatcher modules path
+
+---
+ SConstruct | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/SConstruct b/SConstruct
+index 386dd22..1654441 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -93,7 +93,7 @@ def CheckWiX(context):
+ 
+ def get_spd_module_dir():
+     env = Environment()
+-    return env.ParseConfig("pkg-config speech-dispatcher --variable=modulebindir", passthru)
++    return "/usr/lib/speech-dispatcher-modules"
+ 
+ def validate_spd_version(key,val,env):
+     m=re.match(r"^\d+\.\d+",val)
+-- 
+2.30.2
+
