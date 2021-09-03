@@ -36,12 +36,14 @@ done
 
 pr_info "Generating the (unsigned) index..."
 
+rm $OUT_DIR/$BUILD_ARCH/APKINDEX.tar.gz
+
 $APK_BIN index \
 	--allow-untrusted \
 	--no-warnings \
+	--rewrite-arch $BUILD_ARCH \
 	-d "travmurav-$(date -I)" \
 	-o $OUT_DIR/$BUILD_ARCH/APKINDEX.tar.gz \
-	-x $OUT_DIR/$BUILD_ARCH/APKINDEX.tar.gz \
 	$OUT_DIR/$BUILD_ARCH/*.apk
 
 pr_info "Signing the index..."
