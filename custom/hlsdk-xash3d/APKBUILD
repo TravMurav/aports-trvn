@@ -1,0 +1,45 @@
+# Contributor:
+# Maintainer:
+pkgname=hlsdk-xash3d
+pkgver=0_git20210906
+pkgrel=0
+pkgdesc="Half-Life SDK for Xash3D & GoldSource with some fixes."
+url="https://github.com/FWGS/hlsdk-xash3d"
+arch="all"
+license="proprietary"
+depends=""
+makedepends="python3"
+checkdepends=""
+install=""
+options="!check"
+
+subpackages="$pkgname-doc"
+
+_commit="136ee78cfd497c0defa47d667ba0e2bf3bf612ef"
+
+source="
+	$pkgname-$_commit.tar.gz::https://github.com/FWGS/hlsdk-xash3d/archive/$_commit.tar.gz
+"
+
+builddir="$srcdir/$pkgname-$_commit"
+
+build() {
+	python3 ./waf configure \
+		-8 -T release \
+		-j `getconf _NPROCESSORS_ONLN` \
+		--prefix="$pkgdir"/usr \
+		--enable-lto \
+		--enable-poly-opt
+
+	python3 ./waf build
+}
+
+package() {
+	install -Dm644 $builddir/LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+	python3 ./waf install \
+		--destdir "$pkgdir"/usr/lib/hlsdk
+}
+
+sha512sums="
+26169f18a27633dce5fbb38b76743769365be2326f68b08c712a47e893dc3082f064723d875a028bf9c253a314bdaa9a99b8d5114c177448a209c12f7af7bf28  hlsdk-xash3d-136ee78cfd497c0defa47d667ba0e2bf3bf612ef.tar.gz
+"
