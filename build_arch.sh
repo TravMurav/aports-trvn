@@ -36,7 +36,7 @@ done
 
 pr_info "Generating the (unsigned) index..."
 
-rm $OUT_DIR/$BUILD_ARCH/APKINDEX.tar.gz
+rm -f $OUT_DIR/$BUILD_ARCH/APKINDEX.tar.gz
 
 $APK_BIN index \
 	--allow-untrusted \
