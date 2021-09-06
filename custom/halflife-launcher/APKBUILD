@@ -1,0 +1,35 @@
+# Contributor:
+# Maintainer:
+pkgname=halflife-launcher
+pkgver=0
+pkgrel=0
+pkgdesc="Half-Life launcher script, using Xash3D. Needs game data"
+url="https://github.com/TravMurav/aports-trvn"
+arch="noarch"
+license="MIT"
+depends="xash3d-fwgs xash3d-fwgs-extras hlsdk-xash3d zenity"
+makedepends=""
+checkdepends=""
+install=""
+options="!check"
+
+source="
+	hl-launcher.sh
+	hl-launcher.desktop
+"
+
+builddir="$srcdir/$pkgname-$_commit"
+
+build() { 
+	mkdir -p "$pkgdir"
+}
+
+package() {
+	install -Dm755 $srcdir/hl-launcher.sh "$pkgdir"/usr/bin/hl-launcher.sh
+	install -Dm644 $srcdir/hl-launcher.desktop "$pkgdir"/usr/share/applications/hl-launcher.desktop
+}
+
+sha512sums="
+ca38a1804aa9b8c420fedebc9ee6db20dc9f47f95576deca9ced16a308feaba40e23979220e9d9888c7e16d3852b146b33eabd71fce74f371c3f418f3bf02461  hl-launcher.sh
+d94c6d48afffa2108038afed02a42bd4ce593673106eb6eba6350e84395f82c03589794c09fc37da5e828e94c4fae4ff56fffd39bb0bd6fe268748455f102848  hl-launcher.desktop
+"
