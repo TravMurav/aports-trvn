@@ -1,0 +1,34 @@
+# Contributor:
+# Maintainer:
+pkgname=power-profiles-daemon
+pkgver=0.10.1
+pkgrel=0
+pkgdesc="Makes power profiles handling available over D-Bus"
+url="https://gitlab.freedesktop.org/hadess/power-profiles-daemon"
+arch="all"
+license="GPL-3.0"
+depends="upower polkit"
+makedepends="meson ninja glib-dev libgudev-dev upower-dev polkit-dev"
+install=""
+source="https://gitlab.freedesktop.org/hadess/power-profiles-daemon/-/archive/$pkgver/$pkgname-$pkgver.tar.gz"
+builddir="$srcdir/$pkgname-$pkgver"
+
+build() {
+	meson \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--localstatedir=/var \
+		--buildtype=plain \
+		-Dsystemdsystemunitdir="/etc/systemd/" \
+		. output
+	ninja -C output
+}
+
+package() {
+	DESTDIR="$pkgdir" ninja -C output install
+}
+
+sha512sums="
+8cb29232edf5020e6cd2c511c9abd4ff375000f3bdb760942b4b26100beb5d79c763c0690b315c169df68245167bce066d6d7ccf3d40d81b801fee6e9af60b1c  power-profiles-daemon-0.10.1.tar.gz
+"
