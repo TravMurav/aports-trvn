@@ -1,0 +1,57 @@
+# Contributor:
+# Maintainer:
+_pkgname=strike
+_commit=23a01ea70527dff8546369e1c0d7f6321a898bdb
+pkgname=$_pkgname-git
+pkgver=20211110
+pkgrel=0
+pkgdesc="A simple minimal IDE for the Linux phones."
+url="https://invent.kde.org/maui/strike"
+# armhf blocked by qt5-qtdeclarative
+# s390x, ppc64le, mips64 and riscv64 blocked by qt5-qtwebengine
+arch="all !armhf !s390x !ppc64le !mips64 !riscv64"
+# FIXME: No license in the repo
+license="proprietary"
+# FIXME: ^C^V from nota and may need more stuff
+depends="
+	mauikit-texteditor
+	qmltermwidget
+"
+makedepends="
+	attica-dev
+	extra-cmake-modules
+	kconfig-dev
+	ki18n-dev
+	kio-dev
+	knotifications-dev
+	mauikit-dev
+	mauikit-filebrowsing-dev
+	qt5-qtbase-dev
+	qt5-qtdeclarative-dev
+	qt5-qtsvg-dev
+	qt5-qtwebengine-dev
+	syntax-highlighting-dev
+"
+source="https://invent.kde.org/maui/strike/-/archive/$_commit/$_pkgname-$_commit.tar.gz"
+builddir="$srcdir/$_pkgname-$_commit"
+
+build() {
+	if [ "$CBUILD" != "$CHOST" ]; then
+		CMAKE_CROSSOPTS="-DCMAKE_SYSTEM_NAME=Linux -DCMAKE_HOST_SYSTEM_NAME=Linux"
+	fi
+	cmake -B build \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DBUILD_SHARED_LIBS=True \
+		-DCMAKE_BUILD_TYPE=None \
+		$CMAKE_CROSSOPTS .
+	cmake --build build
+}
+
+package() {
+	DESTDIR="$pkgdir" cmake --install build
+}
+
+sha512sums="
+97bed7401f9316106b501f34fbec916a0a3f80a2a0e33d688ee485249bfb078e67745428365e01a5937d88ef36547351a15687e221f32b1c146063abbe2ff5dd  strike-23a01ea70527dff8546369e1c0d7f6321a898bdb.tar.gz
+"
