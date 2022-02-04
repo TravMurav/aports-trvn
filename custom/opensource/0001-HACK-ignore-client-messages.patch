@@ -1,0 +1,25 @@
+From 9e639975e25f30fbe455d58de377064235c54459 Mon Sep 17 00:00:00 2001
+From: Nikita Travkin <nikita@trvn.ru>
+Date: Fri, 4 Feb 2022 18:06:10 +0500
+Subject: [PATCH] HACK: ignore client messages
+
+---
+ src/atto/src/app_x11.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/atto/src/app_x11.c b/src/atto/src/app_x11.c
+index 025c8e3..5116e3e 100644
+--- a/src/atto/src/app_x11.c
++++ b/src/atto/src/app_x11.c
+@@ -289,7 +289,7 @@ int main(int argc, char *argv[]) {
+ 			case KeyPress:
+ 			case KeyRelease: a__appProcessXKeyEvent(&e); break;
+ 
+-			case ClientMessage:
++			//case ClientMessage:
+ 			case DestroyNotify:
+ 			case UnmapNotify: goto exit; break;
+ 			}
+-- 
+2.34.1
+

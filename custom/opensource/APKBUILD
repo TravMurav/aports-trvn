@@ -1,0 +1,57 @@
+# Contributor:
+# Maintainer:
+pkgname=opensource
+pkgver=0_git20220204
+pkgrel=0
+pkgdesc="Load Source games maps as combined meshes correctly positioned relative to each other"
+url="https://github.com/w23/OpenSource"
+arch="all"
+license="WTFPL"
+depends=""
+depends_dev=""
+makedepends="cmake libx11-dev mesa-dev"
+install=""
+options="!check"
+
+_commit="454773e75f458e415a9f3c79409b686661616b83"
+
+source="
+	$pkgname-$_commit.tar.gz::https://github.com/w23/OpenSource/archive/$_commit.tar.gz
+	atto.tar.gz::https://github.com/w23/atto/archive/13d1d8a7dbd66e79c7e28ecae22485e801470723.tar.gz
+	0001-fix-incorrect-define.patch
+	0001-HACK-ignore-client-messages.patch
+	"
+builddir="$srcdir/OpenSource-$_commit"
+
+prepare() {
+	mv $srcdir/atto-13d1d8a7dbd66e79c7e28ecae22485e801470723/* $builddir/src/atto
+
+	default_prepare
+}
+
+build() {
+
+	ln -sfv $srcdir/atto-13d1d8a7dbd66e79c7e28ecae22485e801470723/* src/atto
+
+	if [ "$CBUILD" != "$CHOST" ]; then
+		CMAKE_CROSSOPTS="-DCMAKE_SYSTEM_NAME=Linux -DCMAKE_HOST_SYSTEM_NAME=Linux"
+	fi
+	cmake -B build \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_BUILD_TYPE=None \
+		$CMAKE_CROSSOPTS .
+	cmake --build build
+}
+
+package() {
+	mkdir -p $pkgdir
+	install -Dm755 $builddir/build/OpenSource "$pkgdir"/usr/bin/OpenSource
+	install -Dm644 $builddir/misc/*.cfg -t "$pkgdir"/usr/share/OpenSource
+}
+
+sha512sums="
+95cea01b98cb8149df521712e635a8d03efa2487cbe7e20a91e22c23917d22780ff42e04ce91a53f58fdb9e77a6bc13332c0327843ca05806c839353a5449ab6  opensource-454773e75f458e415a9f3c79409b686661616b83.tar.gz
+5141c7c5e9ba7b71e84634d2b34b97dc3902292b9b3cacdae7ccadd6f46683ca0fa3915b87f17fcd16bb1df535517f364492ebf9cf3e4a7e0ac454cbbd92b5c7  atto.tar.gz
+dbdc6b24c472cd5abd82618a273cdc971c0636bb191d6e9f99b37d13139c2583b7ad7d572a714645a3fc08e6c509c905d6ffff422c887ba9b19e10718325589a  0001-fix-incorrect-define.patch
+c997d7b98473f9412cc3b2e39f184c55c346600203547d0cf5a9b2b8573f538982f24cd9f00ad9bbe8c3bfac305b18b5ffdd5bfb3fa7a4078a7ff2564209ec9f  0001-HACK-ignore-client-messages.patch
+"

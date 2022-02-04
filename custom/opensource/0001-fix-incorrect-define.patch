@@ -1,0 +1,25 @@
+From 896900722de3cd2c360d6ad543db9edf09c7475f Mon Sep 17 00:00:00 2001
+From: Nikita Travkin <nikita@trvn.ru>
+Date: Fri, 4 Feb 2022 18:03:56 +0500
+Subject: [PATCH] fix incorrect define
+
+---
+ src/filemap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/filemap.c b/src/filemap.c
+index 3972c30..f392f92 100644
+--- a/src/filemap.c
++++ b/src/filemap.c
+@@ -4,7 +4,7 @@
+ #ifndef _WIN32
+ #include <sys/types.h>
+ #include <sys/stat.h>
+-#include <sys/fcntl.h> /* open */
++#include <fcntl.h> /* open */
+ #include <unistd.h> /* close */
+ #include <stdio.h> /* perror */
+ 
+-- 
+2.34.1
+
