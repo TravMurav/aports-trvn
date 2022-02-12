@@ -1,9 +1,9 @@
 # Contributor:
 # Maintainer:
 _pkgname=strike
-_commit=23a01ea70527dff8546369e1c0d7f6321a898bdb
+_commit=8c4f209ea7407abb007ff515fd189af357dab298
 pkgname=$_pkgname-git
-pkgver=20211110
+pkgver=20220212
 pkgrel=0
 pkgdesc="A simple minimal IDE for the Linux phones."
 url="https://invent.kde.org/maui/strike"
@@ -53,5 +53,5 @@ package() {
 }
 
 sha512sums="
-97bed7401f9316106b501f34fbec916a0a3f80a2a0e33d688ee485249bfb078e67745428365e01a5937d88ef36547351a15687e221f32b1c146063abbe2ff5dd  strike-23a01ea70527dff8546369e1c0d7f6321a898bdb.tar.gz
+dc052afc9cfb05268c2975e3bfa87aacc7e350fa72e53797db68dc0bb64ccc1795f01bfaa2e37ba21fb2a261bff758a27966d5639ec15c616c9a6b49a845dff6  strike-8c4f209ea7407abb007ff515fd189af357dab298.tar.gz
 "
