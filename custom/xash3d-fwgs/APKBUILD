@@ -1,14 +1,14 @@
 # Contributor:
 # Maintainer:
 pkgname=xash3d-fwgs
-pkgver=0_git20210906
+pkgver=0_git20220318
 pkgrel=0
 pkgdesc="Xash3D is a game engine, aimed to provide compatibility with Half-Life Engine"
 url="https://github.com/FWGS/xash3d-fwgs"
 arch="all"
 license="proprietary"
 depends=""
-makedepends="python3 freetype-dev fontconfig-dev sdl2-dev tree"
+makedepends="python3 freetype-dev fontconfig-dev sdl2-dev"
 checkdepends=""
 install=""
 options="!check"
@@ -18,32 +18,40 @@ subpackages="
 	$pkgname-extras
 "
 
-_commit="2939ab8ea47a3a0c3f662e0b9fc73939ee9639dc"
+_commit="65d624140efd6729da246634f2ce637b88d1c79f"
+
+_commit_mainui="01e964fdc26f5dce1512c030d0dfd68e17be2858"
+_commit_miniutl="67c8c226c451f32ee3c98b94e04f8966092b70d3"
+_commit_vgui="93573075afe885618ea15831e72d44bdacd65bfb"
+_commit_glwes="11384d5cf6de22de3a9a47f97f2e1a4f069d4cd4"
+_commit_gl4es="4f2151a104ac45bf5417a0063e96148204f8256c"
+_commit_nanogl="5a22eab53433dcd0d27110166ae33b91d188e342"
 
 source="
 	$pkgname-$_commit.tar.gz::https://github.com/FWGS/xash3d-fwgs/archive/$_commit.tar.gz
 	extras.pak::https://github.com/FWGS/xash-extras/releases/download/v0.19.2/extras.pak
-	mainui.tar.gz::https://github.com/FWGS/mainui_cpp/archive/d8e2adbc5b6a30a5c676e2b450ca9e1f93f44104.tar.gz
-	miniutl.tar.gz::https://github.com/FWGS/miniutl/archive/09fb8abc8cdac9b30e8794798e32dc277ff199fb.tar.gz
-	vgui-dev.tar.gz::https://github.com/FWGS/vgui-dev/archive/93573075afe885618ea15831e72d44bdacd65bfb.tar.gz
-	gl-wes-v2.tar.gz::https://github.com/FWGS/gl-wes-v2/archive/11384d5cf6de22de3a9a47f97f2e1a4f069d4cd4.tar.gz
-	gl4es.tar.gz::https://github.com/ptitSeb/gl4es/archive/a0e87aa362efa072598b7b671df67f8565b387fe.tar.gz
-	nanogl.tar.gz::https://github.com/FWGS/nanogl/archive/5a22eab53433dcd0d27110166ae33b91d188e342.tar.gz
+	mainui-$_commit_mainui.tar.gz::https://github.com/FWGS/mainui_cpp/archive/$_commit_mainui.tar.gz
+	miniutl-$_commit_miniutl.tar.gz::https://github.com/FWGS/miniutl/archive/$_commit_miniutl.tar.gz
+	vgui-dev-$_commit_vgui.tar.gz::https://github.com/FWGS/vgui-dev/archive/$_commit_vgui.tar.gz
+	gl-wes-v2-$_commit_glwes.tar.gz::https://github.com/FWGS/gl-wes-v2/archive/$_commit_glwes.tar.gz
+	gl4es-$_commit_gl4es.tar.gz::https://github.com/ptitSeb/gl4es/archive/$_commit_gl4es.tar.gz
+	nanogl-$_commit_nanogl.tar.gz::https://github.com/FWGS/nanogl/archive/$_commit_nanogl.tar.gz
 "
 
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
-	ln -sfv $srcdir/mainui_cpp-d8e2adbc5b6a30a5c676e2b450ca9e1f93f44104/*	mainui
-	ln -sfv $srcdir/MiniUTL-09fb8abc8cdac9b30e8794798e32dc277ff199fb/*	mainui/miniutl
-	ln -sfv $srcdir/vgui-dev-93573075afe885618ea15831e72d44bdacd65bfb/*	vgui-dev
-	ln -sfv $srcdir/gl-wes-v2-11384d5cf6de22de3a9a47f97f2e1a4f069d4cd4/*	ref_gl/gl-wes-v2
-	ln -sfv $srcdir/gl4es-a0e87aa362efa072598b7b671df67f8565b387fe/*	ref_gl/gl4es
-	ln -sfv $srcdir/nanogl-5a22eab53433dcd0d27110166ae33b91d188e342/*	ref_gl/nanogl
+	ln -sfv $srcdir/mainui_cpp-$_commit_mainui/*	mainui
+	ln -sfv $srcdir/MiniUTL-$_commit_miniutl/*	mainui/miniutl
+	ln -sfv $srcdir/vgui-dev-$_commit_vgui/*	vgui-dev
+	ln -sfv $srcdir/gl-wes-v2-$_commit_glwes/*	ref_gl/gl-wes-v2
+	ln -sfv $srcdir/gl4es-$_commit_gl4es/*		ref_gl/gl4es
+	ln -sfv $srcdir/nanogl-$_commit_nanogl/*	ref_gl/nanogl
 
 	python3 ./waf configure \
 		-8 -T release \
 		-j `getconf _NPROCESSORS_ONLN` \
+		--enable-packaging \
 		--prefix="$pkgdir"/usr \
 		--enable-gl4es \
 		--enable-gles2 \
@@ -69,12 +77,12 @@ extras() {
 }
 
 sha512sums="
-d434b30adca2b0af5f924b3b0d93c709798726358d473a8495795ec7d235ed0f5ab9d66bd04f69906394bcf8e4696dd79dea906e0a53b1999779e5f7f7d61eb6  xash3d-fwgs-2939ab8ea47a3a0c3f662e0b9fc73939ee9639dc.tar.gz
+c446aa3644d8e20ac1601af5b22197bf1583bdc021817e09bcbd993ad203e608fb37c1bbbe9baf7e329e6521e8245e03cf428a919cfbf0a226408f8fcc76aca3  xash3d-fwgs-65d624140efd6729da246634f2ce637b88d1c79f.tar.gz
 f4f3b885f047064a185715060e0fcf84f810feccb3702bddf2b7ec2c9637e6112068654fcd57dab6a76a64638cc1fb76b4829bb3e743153bfdb79a56f4925405  extras.pak
-8fc7233d1374ac2cdb1ea6a7cd5c4b4efaf9fba57ab96c30d9c35675472cd648117b1732a9f29aa462a1d0a9b711577e0f1f94c7491cd4508abfa48e2f199525  mainui.tar.gz
-aac80e9858c9e06d9714ce1860995b35a0dbd3dcf14a9d6f98ee6852076c0417d74db6b5ea396810fabd95b500ab90ba1405af94ffbbd4602d42c4b25537a5ff  miniutl.tar.gz
-53304709e5842e012f5ea3eedb9cd18060bc8c9c534085f27a72763ecbc5ce120366bf62bb22abe407599fa8a318aebc92bbbce932f397feda846ac01f8a88cc  vgui-dev.tar.gz
-539037a3ad2d84515a888cd3733df813a8fc243af881e6573a0b1e7963a01aad0e072c290b72fc575c6459e48659fc42ce7337d9c504c9b765fdf780c30d9910  gl-wes-v2.tar.gz
-ec30cabce8728774a0bc55b3a97d6cc8cdf8e57fe2bf97a9f7fd7da6cb18c0ed18c4c11eaf1ede57b6e50b4942d433a5e65d9c779681172c3975cbef2e58ec15  gl4es.tar.gz
-d4fcbd8d7a3ce909fac55dc3b8af95d9335824d5292d0542c4bc84c492970ac011db5b89ce4d54e6298518e73ffeb723b0f8eab565087eb7f38c1d0ef8fe348b  nanogl.tar.gz
+5ec250083a7e4e2f44f4ee2f45a7bac22d1e4e444741560288e95e0ac10b1a355e02673670b984066c0598ad801c388a4a03698e0cb7209482e1b7c93d39d0f2  mainui-01e964fdc26f5dce1512c030d0dfd68e17be2858.tar.gz
+a7d1008ff1e20240e97cd7351a7c5dcd34dd4a85d35b99a1c127eec3f8121eacd31bef1e622fbabf048e8deae15642efc589356dd83447c0bfa0efa5c28aa0f3  miniutl-67c8c226c451f32ee3c98b94e04f8966092b70d3.tar.gz
+53304709e5842e012f5ea3eedb9cd18060bc8c9c534085f27a72763ecbc5ce120366bf62bb22abe407599fa8a318aebc92bbbce932f397feda846ac01f8a88cc  vgui-dev-93573075afe885618ea15831e72d44bdacd65bfb.tar.gz
+539037a3ad2d84515a888cd3733df813a8fc243af881e6573a0b1e7963a01aad0e072c290b72fc575c6459e48659fc42ce7337d9c504c9b765fdf780c30d9910  gl-wes-v2-11384d5cf6de22de3a9a47f97f2e1a4f069d4cd4.tar.gz
+d031da7f3daaebf01413e7448e199ccf0a724107fb44159368adfe5e999710591ed23daa203b91a0a1f3abaf2952782bfc30dbc9d20a2906b5bf1b75faf1e49d  gl4es-4f2151a104ac45bf5417a0063e96148204f8256c.tar.gz
+d4fcbd8d7a3ce909fac55dc3b8af95d9335824d5292d0542c4bc84c492970ac011db5b89ce4d54e6298518e73ffeb723b0f8eab565087eb7f38c1d0ef8fe348b  nanogl-5a22eab53433dcd0d27110166ae33b91d188e342.tar.gz
 "

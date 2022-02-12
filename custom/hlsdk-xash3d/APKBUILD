@@ -1,7 +1,7 @@
 # Contributor:
 # Maintainer:
 pkgname=hlsdk-xash3d
-pkgver=0_git20210906
+pkgver=0_git20220212
 pkgrel=0
 pkgdesc="Half-Life SDK for Xash3D & GoldSource with some fixes."
 url="https://github.com/FWGS/hlsdk-xash3d"
@@ -15,7 +15,7 @@ options="!check"
 
 subpackages="$pkgname-doc"
 
-_commit="136ee78cfd497c0defa47d667ba0e2bf3bf612ef"
+_commit="e7ef84c83db25f5b5b4c8549069135331b5ceeb2"
 
 source="
 	$pkgname-$_commit.tar.gz::https://github.com/FWGS/hlsdk-xash3d/archive/$_commit.tar.gz
@@ -41,5 +41,5 @@ package() {
 }
 
 sha512sums="
-26169f18a27633dce5fbb38b76743769365be2326f68b08c712a47e893dc3082f064723d875a028bf9c253a314bdaa9a99b8d5114c177448a209c12f7af7bf28  hlsdk-xash3d-136ee78cfd497c0defa47d667ba0e2bf3bf612ef.tar.gz
+a1553d523c3c17edec7f49b9974a8a5aab05f9b1197d3b99474b1711b025127c82f95c5c4e1fa3d6521b6b7f64db6c7a0b64c951c8925b04866a4a7f505672a5  hlsdk-xash3d-e7ef84c83db25f5b5b4c8549069135331b5ceeb2.tar.gz
 "
