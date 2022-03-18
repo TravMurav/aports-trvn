@@ -50,8 +50,8 @@ pr_info "Signing the index..."
 
 docker run \
 	-it --rm \
-	-v $(pwd):/mnt \
-	alpine:latest \
-	ash -c "apk add abuild; abuild-sign -k /mnt/$PRIVATE_KEY /mnt/packages/$BUILD_ARCH/APKINDEX.tar.gz"
+	-v $(pwd):/mnt:Z \
+	alpine:edge \
+	ash -c "apk add abuild; cd /mnt; abuild-sign -k /mnt/$PRIVATE_KEY /mnt/packages/$BUILD_ARCH/APKINDEX.tar.gz"
 
 pr_info "DONE!"
