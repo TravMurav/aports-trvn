@@ -23,6 +23,10 @@ done
 chosen_ref=$(zenity --list --text="Select graphic backend" --column=ref $refs | sed 's/libref_\(.*\)\.so/\1/')
 lib_arch=$(basename /usr/lib/hlsdk/$GAME_NAME/dlls/* | sed 's/hl_\(.*\)\.so/\1/')
 
+if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ "$QT_QPA_PLATFORM" = "wayland" ]; then
+	export SDL_VIDEODRIVER=wayland
+fi
+
 /usr/lib/xash3d/xash3d \
 	-dll /usr/lib/hlsdk/$GAME_NAME/dlls/hl_$lib_arch.so \
 	-clientlib /usr/lib/hlsdk/$GAME_NAME/cl_dlls/client_$lib_arch.so \

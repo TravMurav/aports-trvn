@@ -1,7 +1,7 @@
 # Contributor:
 # Maintainer:
 pkgname=halflife-launcher
-pkgver=0
+pkgver=1
 pkgrel=0
 pkgdesc="Half-Life launcher script, using Xash3D. Needs game data"
 url="https://github.com/TravMurav/aports-trvn"
@@ -30,6 +30,6 @@ package() {
 }
 
 sha512sums="
-ca38a1804aa9b8c420fedebc9ee6db20dc9f47f95576deca9ced16a308feaba40e23979220e9d9888c7e16d3852b146b33eabd71fce74f371c3f418f3bf02461  hl-launcher.sh
+e7e6db0e0f46b24e5e2a1c936036f608528316bd4fae4ccefb310acd560811dedfc9749564617faf4dd3f13bf1d06f564ce586d12b2fec85cf3ac32b908f2702  hl-launcher.sh
 d94c6d48afffa2108038afed02a42bd4ce593673106eb6eba6350e84395f82c03589794c09fc37da5e828e94c4fae4ff56fffd39bb0bd6fe268748455f102848  hl-launcher.desktop
 "
